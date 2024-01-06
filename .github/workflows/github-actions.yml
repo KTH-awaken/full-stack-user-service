@@ -17,7 +17,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Maven
-        run: mvn package
+        run: mvn clean install
 
   docker:
     runs-on: ubuntu-latest
