@@ -13,13 +13,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping
 public class AccountController {
 
     private final AccountService accountService;
 
 
-    @PostMapping("/create")
+    @PostMapping("/user/create")
     public void register(@RequestBody CreateUserRequest request, @RequestHeader("Authorization") String authorizationHeader) {
         String token = authorizationHeader.substring(7);
         String role = TokenDecoder.getRoleFromToken(token);
@@ -31,27 +31,32 @@ public class AccountController {
 
 
 
-    @GetMapping("/{userEmail}")
+    @GetMapping("/user/{userEmail}")
     public ResponseEntity<AccountVm> getUserByEmail(@PathVariable String userEmail){
         AccountVm res = accountService.getUserByEmail(userEmail);
         return ResponseEntity.ok(res);
     }
-    @GetMapping("/userid/{userid}")
+    @GetMapping("/user/userid/{userid}")
     public ResponseEntity<AccountVm> getUserByEmail(@PathVariable long userid){
         AccountVm res = accountService.getUserById(userid);
         return ResponseEntity.ok(res);
     }
 
-    @GetMapping("/workers")
+    @GetMapping("/user/workers")
     public ResponseEntity<List<AccountVm>> getWorkers(){
         List<AccountVm> res = accountService.getWorkers();
         return ResponseEntity.ok(res);
     }
 
-    @GetMapping("/patients")
+    @GetMapping("/user/patients")
     public ResponseEntity<List<AccountVm>> getPatients(){
         List<AccountVm> res = accountService.getPatients();
         return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck(){
+        return ResponseEntity.ok("ok");
     }
 
 }
