@@ -36,6 +36,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          working-directory:  ${{ github.workspace }}/target
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
-          context: .
+
