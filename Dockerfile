@@ -4,7 +4,7 @@ VOLUME /tmp
 
 EXPOSE 8081
 
-COPY --chown=appuser:appuser target/**.jar /home/appuser/app.jar
+COPY target/*.jar app.jar
 
 ENTRYPOINT ["java","-jar","/app.jar"]
 
