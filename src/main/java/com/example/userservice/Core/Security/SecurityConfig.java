@@ -19,6 +19,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(httpRequests -> httpRequests
                         .requestMatchers("/user/create").permitAll()
+                        .requestMatchers("/health").permitAll()
+
 //                        .requestMatchers("api/microservice/doctor/**").hasAnyRole("doctor")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
